@@ -1,8 +1,9 @@
 import React from "react";
 import Product from "./Product";
+import BasketCount from "./BasketCount";
+import BasketTotal from "./BasketTotal";
 
-
-const Basket = ({ basket, ...props }) => {
+const Basket = ({ basket, BasketCount, BasketTotal,...props }) => {
   const { removeFromBasket } = props;
   console.log(basket);
 

@@ -27,6 +27,6 @@ const Product = ({item,...props}) => {
 
 export default Product;
 
-Product.propTypes = {
-    trackPrice: Proptypes.number
-}
+// Product.propTypes = {
+//     trackPrice: Proptypes.number
+// }
