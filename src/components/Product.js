@@ -7,7 +7,7 @@ const Product = ({item,...props}) => {
 
   const {  trackName, trackId, artistName, trackPrice, artworkUrl100 } = item ;
   return (
-    <div id={"product-container"}>
+    <div className="products" id={"product-container"}>
         <img src={artworkUrl100}
         alt={artistName} />
       <ul className="list">
