@@ -117,7 +117,7 @@ const basketTotal = basket.reduce(
             <Pagination
               postPerPage={postPerPage}
               totalPosts={productsPost.length}
-              paginate={Pagination}
+              Pagination={Pagination}
               previousPage={previousPage}
               nextPage={nextPage}
             />
@@ -149,6 +149,5 @@ const basketTotal = basket.reduce(
       </div>
     </Router>
   );
-
+  }
 export default App;
-
