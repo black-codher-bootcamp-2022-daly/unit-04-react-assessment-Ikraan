@@ -1,12 +1,12 @@
 import React from "react";
 
-const BasketCount = (props) => {
-
+function BasketCount(props) {
+    console.log(props.basketCount);
     return (
-    <div className="basket-count">
-       {props.BasketCount!== 1? `${props.basketCount} item`:`${props.basketCount} items`}
-    </div>
+      <div className="count">
+        <h1 className="items-basket">Basket</h1>
+        {props.basketCount} items
+      </div>
     );
-}
-
+  }
 export default BasketCount;

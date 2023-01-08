@@ -2,6 +2,7 @@ import React from "react";
 import Product from "./Product";
 
 const ProductList = ({items,...props}) => {
+    console.log(items);
     return(
         <>
         <h1>Suggestions..</h1> {" "}
@@ -26,3 +27,8 @@ const ProductList = ({items,...props}) => {
     );
 };
 export default ProductList;
+
+ProductList.prototypes = {
+    product: PropTypes.array.isRequired
+   
+    }

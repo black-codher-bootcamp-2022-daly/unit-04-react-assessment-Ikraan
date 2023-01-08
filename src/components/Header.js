@@ -3,11 +3,11 @@ import { link } from "react-router-dom";
 
 const Header = (props) => {
     return (
-        <div className="header">
+        <div className="header" id="nav"><h1>The Music Store 🎼</h1>
         <div>
-        <link to="/" id="homelink"> Home</link>|
-        <link to="/about" id="aboutlink">About</link>|
-        <link to="/basket" id="basketlink">Basket {props.itemCount} </link>
+        <link to="/" className="Link" id="homelink"><em>Home</em></link>|
+        <link to="/about" className="Link" id="aboutlink"><em>About</em></link>|
+        <link to="/basket" className="Link" id="basketlink"><em>Basket {props.itemCount}</em></link>
         </div></div>
     )
 }

@@ -8,6 +8,10 @@ body {
   background-color: #fad0e4a2;
 }
 
+title {
+  flex-direction: column;
+}
+
 .app-container { 
   width: 100%;
   margin: auto;
@@ -40,7 +44,7 @@ form {
   align-items: center;
 }
 
-.products {
+.product-container {
   margin-top:5px;
   margin-bottom:15px;
   border-bottom: 1px solid rgb(209, 209, 209);
@@ -49,13 +53,16 @@ form {
 img {
   min-width: 100px;
   margin-right: 5px;
-}
+    flex-basis: 40%;
+    float: inline-start;
+  
+  }
 
-.product .add-button {
+.buttons .add-button {
   background-color: rgb(79, 149, 255);
 }
 
-.product .remove-button{
+.buttons .remove-button{
   padding: 10px 15px;
   border: 0px;  
   border-radius: 20px;

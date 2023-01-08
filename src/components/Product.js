@@ -2,39 +2,31 @@ import react from "react";
 import Proptypes from "prop-types";
 import App from "../App";
 
-function Product({product,...props}) {
-    const {artistName,trackName,trackPrice,trackId,kind,artworkUrl100,longDescription,artistId,inBasket} = Product;
-    
-        return (
-    <div className='productInfo'>
+const Product = ({item,...props}) => {
+  console.log(props)
+
+  const {  trackName, trackId, artistName, trackPrice, artworkUrl100 } = item ;
+  return (
+    <div id={"product-container"}>
         <img src={artworkUrl100}
-        alt={trackName && artistName}></img>
-        <ul className="product-info">
-            <h2>{trackName}</h2>
-            <h2>{artistName}</h2>
-            {trackPrice ? <h3 className="price"> £ {trackPrice} </h3> : <h3>-</h3>}
-            {kind !== "song" && (
-          <p className="long-description">
-            {longDescription
-              && `${longDescription.substring(0, 500)}... `} </p>
-            )}
-        </ul>
-        <button id="add-button" onClick = {()=> props.addToBasket (trackId ? trackId : artistId)}>
-            {props.inBasket ? "Remove" : "Add to Basket"} Add to Basket </button>
-        </div>
-    
-);
+        alt={artistName} />
+      <ul className="list">
+        <h2>{trackName}</h2>
+        <h2>{artistName}</h2>
+        <h4 className="price">{trackPrice?"£"+trackPrice:"0"} </h4>
+      </ul>
+      <div className="buttons">
+        {item.inBasket ? 
+      <button  id="add-button" onClick={() => props.removeFromBasket(trackId)}> Remove</button> :
+      <button  id="add-button" onClick={() => props.addToBasket(trackId)}> Add to basket</button>
+        }
+      </div>
+    </div>
+  );
 };
 
-Product.propTypes = {
-    items: PropTypes.shape({
-      artistName: PropTypes.string.isRequired,
-      artistId: PropTypes.number,
-      trackName: PropTypes.string.isRequired,
-      trackId: PropTypes.number.isRequired,
-      trackPrice: PropTypes.number.isRequired,
-      artworkUrl100: PropTypes.string.isRequired,
-    }),
-  };
+export default Product;
 
-  export default Product;
+Product.propTypes ={
+    trackPrice: PropTypes.number
+}
