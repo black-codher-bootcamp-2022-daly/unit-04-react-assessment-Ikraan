@@ -1,7 +1,7 @@
 import React from "react";
 import { link } from "react-router-dom";
 
-const Header = (props) => {
+function Header (props) {
     return (
         <div className="header" id="nav"><h1>The Music Store 🎼</h1>
         <div>
