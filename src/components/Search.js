@@ -1,18 +1,21 @@
 import React from "react";
+const propTypes ={};
+const defaultProps = {};
 
 function Search (props) {
     const {search,term, setTerm} = props;
 
 
-function handleSubmit(e) {
+const handleSubmit = (e) => {
     props.search(props.term);
     setTerm(e.target.value);
 }
-function onSubmit(event) {
+const onSubmit = (event) => {
     event.preventDefault();
     props.search(props.term);
 }
 return (
+  <>
   <form className="Search" id="searchAPI">
     <p style={{ color: "red" }}>
       <em>{term && "Keywords Typed: " + term}</em> </p>
@@ -27,9 +30,11 @@ return (
     <button className="Submit-btn" type="submit" onClick={onSubmit}>
       Find
     </button>
-  </form>
+  </form></>
 );
 };
 
+Search.propTypes = propTypes;
+Search.defaultProps = defaultProps;
 
 export default Search;

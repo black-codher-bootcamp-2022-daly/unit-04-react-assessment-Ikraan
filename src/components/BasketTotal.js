@@ -1,13 +1,13 @@
 import React from 'react';
-
-const BasketTotal = (props) => {
-    console.log(props.BasketTotal);
-    let formatter = new Intl.NumberFormat ('en-GB',{
+let formatter = new Intl.NumberFormat ('en-GB',{
         style: "currency",
         currency: "GBP"
-    })
-    return <h1 className='total'>{props.basketTotal}
-    </h1>
-}
+});
+
+const BasketTotal = (props) => {
+    console.log(props.basketTotal);
+return (<div className='total'>{formatter.format(Math.abs(props.basketTotal))}
+    </div>
+); }
 
 export default BasketTotal;

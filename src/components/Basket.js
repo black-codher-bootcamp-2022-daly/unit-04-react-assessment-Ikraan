@@ -1,33 +1,26 @@
 import React from "react";
 import Product from "./Product";
+import PropTypes from "prop-types";
 import BasketCount from "./BasketCount";
 import BasketTotal from "./BasketTotal";
 
-const Basket = ({ basket, BasketCount, BasketTotal,...props }) => {
-  const { removeFromBasket } = props;
-  console.log(basket);
+const Basket = ({ basket, basketTotal,...props }) => {
+  // const { removeFromBasket } = props;
+  const count = basket = basket.length;
+  // console.log(basket);
 
   return (
-    <>
-      {!basket || basket.length === 0 ? (
-        <div className="empty">Sorry, no items in basket...</div>
-      ) : (
-        basket.map((item) => (
-          <div className="product" key={item.trackId}>
-            <Product
-              item={item}
-              kind={item.kind}
-              name={item.trackName}
-              thumbnail={item.artworkUrl100}
-              currency={item.currency}
-              price={item.trackPrice}
-              inBasket={item.inBasket}
-              removeFromBasket={removeFromBasket}
-            />
-          </div>
-        ))
-      )}
-    </>
-  );
-};
+    <div className="basket"> <h1>Basket: </h1>
+    <BasketCount basketCount={count} />
+    { (count > 0 ? 
+    basket.map(item => <Product key={item.trackId} item={item} {...props} /> ):
+           <div className="empty">Sorry, no items in basket...</div>)}
+           <BasketTotal basketTotal={basketTotal} />
+    </div>
+  );}
+
+Basket.propTypes = {
+  basket: PropTypes.array.isRequired
+}
+
 export default Basket;
