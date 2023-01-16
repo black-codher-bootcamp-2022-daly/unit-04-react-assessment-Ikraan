@@ -8,22 +8,20 @@ const ProductList = ({items,...props}) => {
     return(
         <>
         <div id="search-result">
-        <h1>Suggestions..</h1>
-        {        
-        ( items.length===0) ? 
+        <h1>Suggestions..</h1> {" "}
+        {(!items || items.length===0) ? 
           (<div className="empty">No items found...</div>) :
-            (items
-              .map(item => (<Product 
-                key={item.trackId} 
-                item={item} 
-                id={item.trackId}
+            (items.map((items => (<Product 
+                key={items.trackId} 
+                item={items} 
+                id={items.trackId}
                 {...props}
-                thumbnail={product.artworkUrl100}
+                thumbnail={items.artworkUrl100}
                 price={props.trackPrice}
                 currency={props.currency}
                 addToBasket={props.addToBasket}
 
-                />)
+                />) )
             )          
             )
               }
