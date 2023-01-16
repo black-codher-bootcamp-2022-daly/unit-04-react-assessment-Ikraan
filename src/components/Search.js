@@ -31,7 +31,5 @@ return (
 );
 };
 
-Search.propTypes = propTypes;
-Search.defaultProps = defaultProps;
 
 export default Search;

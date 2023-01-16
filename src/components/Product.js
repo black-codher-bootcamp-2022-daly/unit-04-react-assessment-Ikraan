@@ -1,6 +1,7 @@
 import react from "react";
 import Proptypes from "prop-types";
 import Product from './Product';
+import App from "../App";
 import BasketTotal from "./BasketTotal";
 import BasketCount from "./BasketCount";
 
