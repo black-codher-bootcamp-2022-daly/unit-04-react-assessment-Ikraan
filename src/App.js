@@ -12,31 +12,39 @@ import About from './pages/About';
 import BasketTotal from './components/BasketTotal';
 import Pagination from './components/Pagination';
 
+
 function App() {
-
-  const [product, setProducts] = useState(data.slice(0,10));
+  const [products, setProducts] = useState(data);
   const [basket, setBasket] = useState([]);
-  const [term, setTerm] = useState(' ');
   const [total, setTotal] = useState(0);
+  const [term, setTerm] = useState("");
   const [count, setCount] = useState(0);
-  const [loadMore, setLoadMore] = useState(true);
 
-  function moreData(currentCount) {
-    if (currentCount ===data.length - 10) setLoadMore(false);
-    return setProducts((currentItems) => [
-      ...currentItems,
-      ...data.slice(currentCount, currentCount + 10),
-    ])
+const Pagination = (pageNumber) => {
+  setCurrentPage(pageNumber);
+}
+const previousPage = () => {
+  if (currentPage !== 1) {
+    setCurrentPage(currentPage - 1);
   }
+};
 
-  useEffect(()=> {
-  }, [term]);
+const nextPage = () => {
+  if (currentPage !== Math.ceil(productsPost.length / postPerPage)) {
+    setCurrentPage(currentPage + 1);
+  }
+};
+
+const basketTotal = basket.reduce(
+  (accumulator, el) => accumulator + el.trackPrice,
+  0
+);
 
   function addToBasket(trackId) {
-   
-    product.forEach((items) => {
-      if (items.trackId === trackId) {
+    products.map((product) => {
+      if (product.trackId === trackId) {
         product.inBasket = true;
+        console.log(product);
         setBasket((prev) => [...prev, product]);
 
         if (product.trackPrice) {
@@ -47,32 +55,32 @@ function App() {
       }
       console.log(setTotal);
       setCount(count + 1);
-      // return product;
     });
   }
-  
+
   function removeFromBasket(trackId) {
     const removeFromCart = [];
-    basket.forEach((product) => {
-      if (product.trackId !== trackId) {
-        removeFromCart.push(product);
+    basket.filter((products) => {
+      if (products.trackId !== trackId) {
+        removeFromCart.push(products);
       } else {
-        product.inBasket = !product.inBasket;
-        if (product.trackPrice) {
-          setTotal(parseFloat(total - product.trackPrice));
+        products.trackId = !products.trackId;
+        if (products.trackPrice) {
+          setTotal(parseFloat(total - products.trackPrice));
         }
-        return product;
+        return products;
       }
     });
 
     setBasket(removeFromCart);
     setCount(count - 1);
   }
-+ console.log(product);
+
+  console.log(products);
 
   async function search(value) {
-    console.log("find books that got clicked", value);
-    const results = await fetch(`https://itunes.apple.com/search?term=${value}&limit=30&explicit=no`).then((res) => res.json());
+    const url = `https://itunes.apple.com/search?term=${value}&limit=30&explicit=no`;
+    const results = await fetch(url).then((res) => res.json());
     if (!results.error) {
       setProducts(
         results.results.filter(
@@ -85,51 +93,62 @@ function App() {
   }
 
   function BasketList() {
-    return(
+    return (
       <>
-      <BasketCount />
-      <Basket 
-      basket={basket}
-      addToBasket={addToBasket}
-      removeFromBasket={removeFromBasket}
-      basketTotal={total}
-      basketCount={count} />
+        <BasketCount />
+        <Basket
+          basket={basket}
+          addToBasket={addToBasket}
+          removeFromBasket={removeFromBasket}
+          basketTotal={total}
+          basketCount={count}
+        />
+        <div class="totalPrice">Total Price: <BasketTotal basketTotal={basketTotal} /></div>
       </>
+      
     );
   }
 
   function Home() {
     return (
-      <Container>
-        <Search term={term} setTerm={setTerm} search={search} />
-        <ProductList
-          items={product}
-          addToBasket={addToBasket}
-          removeFromBasket={removeFromBasket}
-          basketCount={data.length}
-        />
-        {loadMore && (
-          <button
-            className="load-more-button"
-            onClick={() => moreData(product.length)}
-          >
-            Load More Products
-          </button>
+      <>
+        <Search term={term} setTerm={setTerm} search={search}></Search>
+        {productsPost ? (
+          <div className="product-content-section">
+            <Pagination
+              postPerPage={postPerPage}
+              totalPosts={productsPost.length}
+              Pagination={Pagination}
+              previousPage={previousPage}
+              nextPage={nextPage}
+            />
+            <ProductList
+              items={currentPosts}
+              addToBasket={addToBasket}
+              removeFromBasket={removeFromBasket}
+              itemCount={data.length}
+            />
+          </div>
+        ) : (
+          <div>Loading....</div>
         )}
-      </Container>
+        {items.length === 0 && "Sorry, no items in basket..."}
+      </>
     );
   }
   return (
     <Router>
       <div className="App">
-        <Header itemCount={count} />
+        <h1 className="Media">Media Store</h1>
+        <Header itemCount={count}></Header>
+        <img src="headerimg.jpg" alt="image" className="HeaderImg" />
         <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/basket" element={<BasketList />} />
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/basket" element={<BasketProducts />}></Route>
         </Routes>
       </div>
     </Router>
   );
-}
+  }
 export default App;
