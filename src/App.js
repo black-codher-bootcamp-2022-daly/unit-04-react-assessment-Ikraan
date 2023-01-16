@@ -45,7 +45,9 @@ function App() {
           setTotal(total + 0);
         }
       }
+      console.log(setTotal);
       setCount(count + 1);
+      return product;
     });
   }
   
@@ -66,6 +68,7 @@ function App() {
     setBasket(removeFromCart);
     setCount(count - 1);
   }
+console.log(product);
 
   async function search(value) {
     console.log("find books that got clicked", value);
@@ -97,7 +100,7 @@ function App() {
 
   function Home() {
     return (
-      <Container>
+      <Prop>
         <Search term={term} setTerm={setTerm} search={search} />
         <ProductList
           items={product}
@@ -113,7 +116,7 @@ function App() {
             Load More Products
           </button>
         )}
-      </Container>
+      </Prop>
     );
   }
   return (
