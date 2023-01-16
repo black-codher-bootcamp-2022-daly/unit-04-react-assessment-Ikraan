@@ -1,5 +1,5 @@
 import './styles/App.css';
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/App.css';
 import data from './models/data.json';
@@ -14,12 +14,23 @@ import Pagination from './components/Pagination';
 
 function App() {
 
-  const itemsPerPage = 4;
   const [product, setProducts] = useState(data.slice(0,10));
   const [basket, setBasket] = useState([]);
   const [term, setTerm] = useState(' ');
   const [total, setTotal] = useState(0);
   const [count, setCount] = useState(0);
+  const [loadMore, setLoadMore] = useState(true);
+
+  function moreData(currentCount) {
+    if (currentCount ===data.length - 10) setLoadMore(false);
+    return setProducts((currentItems) => [
+      ....currentItems,
+      ...data.slice(currentCount, currentCount + 10),
+    ])
+  }
+
+  useEffect(()=> {
+  }, [term]);
 
   function addToBasket(trackId) {
    
@@ -40,15 +51,15 @@ function App() {
   
   function removeFromBasket(trackId) {
     const removeFromCart = [];
-    basket.forEach((products) => {
-      if (products.trackId !== trackId) {
-        removeFromCart.push(products);
+    basket.forEach((product) => {
+      if (product.trackId !== trackId) {
+        removeFromCart.push(product);
       } else {
-        products.inBasket = !products.inBasket;
-        if (products.trackPrice) {
-          setTotal(parseFloat(total - products.trackPrice));
+        product.inBasket = !product.inBasket;
+        if (product.trackPrice) {
+          setTotal(parseFloat(total - product.trackPrice));
         }
-        return products;
+        return product;
       }
     });
 
@@ -58,11 +69,15 @@ function App() {
 
   async function search(value) {
     console.log("find books that got clicked", value);
-    const url = `https://itunes.apple.com/search?term=${value}&limit=30&explicit=no`;
-
-    const results = await fetch(url).then((res) => res.json());
+    const results = await fetch(`https://itunes.apple.com/search?term=${value}&limit=30&explicit=no`).then((res) => res.json());
     if (!results.error) {
-      setProducts(results.results.filter((result) => result.trackName));
+      setProducts(
+        results.results.filter(
+          (result) =>
+            result.trackName &&
+            basket.findIndex((product) => result.id === product.trackId) === -1
+        )
+      );
     }
   }
 
@@ -75,49 +90,43 @@ function App() {
       addToBasket={addToBasket}
       removeFromBasket={removeFromBasket}
       basketTotal={total}
-      BasketCount={count} />
-
-      <div className='Price-total'>
-        Total Price <BasketTotal basketTotal={total} />
-      </div>
+      basketCount={count} />
       </>
     );
   }
 
-  // useEffect(() => {
-  //   let basketCountLabel = `Basket: ${basket.length} item` + (basket.length === 1 ? "" : "s");
-  //   if (document) {
-  //     document.title = basketCountLabel;
-  //     document.getElementById("basketlink").innerText = basketCountLabel;
-  //   }
-  // });
   function Home() {
     return (
-
-      <>
-        <Search term={term} setTerm={setTerm} handleSubmit={search} />
+      <Container>
+        <Search term={term} setTerm={setTerm} search={search} />
         <ProductList
-          product={product}
+          items={product}
           addToBasket={addToBasket}
           removeFromBasket={removeFromBasket}
           basketCount={data.length}
         />
-      </>
+        {loadMore && (
+          <button
+            className="load-more-button"
+            onClick={() => moreData(product.length)}
+          >
+            Load More Products
+          </button>
+        )}
+      </Container>
     );
   }
-
   return (
-    <div className="container">
-      <h1>Media Store App</h1>
-      <BrowserRouter>
+    <Router>
+      <div className="App">
         <Header itemCount={count} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="basket" element={<Basketpage />} />
+          <Route index path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/basket" element={<BasketList />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </Router>
   );
 }
 export default App;
