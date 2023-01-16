@@ -8,8 +8,8 @@ const ProductList = ({items,...props}) => {
   return(
       <>
       <h1>Suggestions..</h1> {" "}
-      {(!products || products.length === 0)?(<h1>No items found...</h1>) : (
-          products.map((product)=> (
+      {(!Product || Product.length === 0)?(<h1>No items found...</h1>) : (
+          Product.map((product)=> (
               <Product 
               product= {product}
               id={product.trackId}
@@ -32,5 +32,4 @@ export default ProductList;
 
 ProductList.prototypes = {
     product: PropTypes.array.isRequired
-   
-    }
+ }
