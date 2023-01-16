@@ -22,6 +22,8 @@ return (
       id="term"
       value={props.term}
       onChange={handleSubmit}
+      autoFocus="autoFocus"
+      placeholder="Search items here..."
     />
 
     <button className="Submit-btn" type="submit" onClick={onSubmit}>
