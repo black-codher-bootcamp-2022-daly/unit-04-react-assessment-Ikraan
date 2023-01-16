@@ -7,20 +7,20 @@ function Header(props) {
       <div id="navi">
         <h1 className="title"> Media Store 🎼</h1>
         <div>
-          <link className="link" to="/" id="homelink">
+          <Link className="link" to="/" id="homelink">
             {" "}
             <h4>Home</h4>
-          </link>
+          </Link>
         </div>
         <div>
-          <link className="link" to="/about" id="aboutlink">
+          <Link className="link" to="/about" id="aboutlink">
             <h4>About </h4>
-          </link>
+          </Link>
         </div>
         <div>
-          <link className="link" to="/basket" id="basketlink">
+          <Link className="link" to="/basket" id="basketlink">
             <h4>Basket:{props.itemCount}</h4>
-          </link>
+          </Link>
         </div>
       </div>
     );
