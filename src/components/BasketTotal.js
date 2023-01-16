@@ -6,8 +6,7 @@ function BasketTotal(props) {
         style: "currency",
         currency: "GBP"
     })
-    return ( <h1 className='total'>{((props.basketTotal))}
-    </h1>
+    return ( <h1 className='total'> {props.basketTotal} </h1>
 )}
 
 export default BasketTotal;

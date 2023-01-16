@@ -4,6 +4,7 @@ import Product from './Product';
 import BasketTotal from "./BasketTotal";
 import BasketCount from "./BasketCount";
 
+
 const Product = ({item,...props}) => {
   console.log(props)
 
@@ -27,9 +28,9 @@ const Product = ({item,...props}) => {
   );
 };
 
-Product.propTypes = {
-  item: PropTypes.object.isRequired
-}
+// Product.propTypes = {
+//   item: PropTypes.object.isRequired
+// }
 
 export default Product;
 
