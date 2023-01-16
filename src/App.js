@@ -88,7 +88,7 @@ function App() {
   }
   function Home() {
     return (
-      <Container>
+      <Prop>
         <Search term={term} setTerm={setTerm} search={search} />
         <ProductList
           items={product}
@@ -104,7 +104,7 @@ function App() {
             Load More Products
           </button>
         )}
-      </Container>
+      </Prop>
     );
   }
   return (

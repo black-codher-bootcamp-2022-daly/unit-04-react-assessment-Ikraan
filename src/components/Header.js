@@ -19,3 +19,5 @@ function Header(props) {
             <h4>Basket:{props.itemCount}</h4>
           </Link>
         </div></div> )}
+
+export default Header;

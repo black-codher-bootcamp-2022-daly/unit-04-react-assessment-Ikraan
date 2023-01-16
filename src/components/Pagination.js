@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactPaginate from 'react-paginate';
 import Product from './Product';
 
 const Pagination = ({ postsPerPage, totalPosts, nextPage, previousPage }) => {
