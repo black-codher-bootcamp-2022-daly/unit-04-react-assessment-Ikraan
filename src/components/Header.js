@@ -1,27 +1,15 @@
 import React from "react";
 import { link } from "react-router-dom";
 
+function Header (props) {
+  return (
+      <div className="header" id="nav"><h1>The Music Store 🎼</h1>
+      <div>
+      <link to="/" className="Link" id="homelink"><em>Home</em></link>|
+      <link to="/about" className="Link" id="aboutlink"><em>About</em></link>|
+      <link to="/basket" className="Link" id="basketlink"><em>Basket {props.itemCount}</em></link>
+      </div></div>
+  )
+}
 
-function Header(props) {
-    return (
-      <div id="navigation">
-        <h1 className="title"> Media Store 🎼</h1>
-        <div>
-          <link className="Link" to="/" id="homelink">
-            <h4>Home</h4>
-          </link>
-        </div>
-        <div>
-          <link className="Link" to="/about" id="aboutlink">
-            <h4>About </h4>
-          </link>
-        </div>
-        <div>
-          <link className="Link" to="/basket" id="basketlink">
-            <h4>Basket: {props.itemCount}</h4>
-          </link>
-        </div>
-      </div>
-    );
-  }
 export default Header;
