@@ -32,8 +32,4 @@ const Basket = ({ basket, basketTotal,...props }) => {
   );
 };
 
-Basket.propTypes = {
-  basket: PropTypes.array.isRequired
-}
-
 export default Basket;
