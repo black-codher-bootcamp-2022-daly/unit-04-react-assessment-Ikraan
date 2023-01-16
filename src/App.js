@@ -12,7 +12,6 @@ import About from './pages/About';
 import BasketTotal from './components/BasketTotal';
 import Pagination from './components/Pagination';
 
-
 function App() {
   const [product, setProducts] = useState(data.slice(0,10));
   const [basket, setBasket] = useState([]);

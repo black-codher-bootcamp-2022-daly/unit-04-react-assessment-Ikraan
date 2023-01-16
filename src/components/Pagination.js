@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-import Items from './Items';
+import Product from './Product';
 
 const Pagination = ({ postsPerPage, totalPosts, nextPage, previousPage }) => {
     const pageNumbers = [];

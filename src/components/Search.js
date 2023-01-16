@@ -21,7 +21,7 @@ return (
       type="text"
       id="term"
       value={props.term}
-      onSubmit={handleSubmit}
+      onChange={handleSubmit}
       autoFocus="autoFocus"
       placeholder="Search items here..."
     />
