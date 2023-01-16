@@ -8,15 +8,15 @@ const ProductList = ({items,...props}) => {
   return(
       <>
       <h1>Suggestions..</h1> {" "}
-      {(!products || products.length === 0)?(<h1>No items found...</h1>) : (
-          products.map((product)=> (
+      {(!items || items.length === 0)?(<h1>No items found...</h1>) : (
+          items.map((items)=> (
               <Product 
-              product= {product}
-              id={product.trackId}
-              key={product.trackId}
-              name={product.trackName}
+              product= {items}
+              id={items.trackId}
+              key={items.trackId}
+              name={items.trackName}
               {...props}
-              thumbnail={product.artworkUrl100}
+              thumbnail={items.artworkUrl100}
               price={props.trackPrice}
               currency={props.currency}
               addToBasket={props.addToBasket}
@@ -31,6 +31,6 @@ const ProductList = ({items,...props}) => {
 export default ProductList;
 
 ProductList.prototypes = {
-  product: PropTypes.array.isRequired
+  item: PropTypes.array.isRequired
  
   }
