@@ -5,7 +5,7 @@ function BasketCount(props) {
     return (
       <div className="count">
         <h1 className="items-basket">Basket</h1>
-        {props.basketCount} items
+        {props.basketCount}
       </div>
     );
   }
