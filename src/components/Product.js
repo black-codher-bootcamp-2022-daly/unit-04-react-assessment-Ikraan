@@ -1,21 +1,21 @@
 import react from "react";
 import Proptypes from "prop-types";
-import App from "../App.";
+import Product from './Product';
+import BasketTotal from "./BasketTotal";
+import BasketCount from "./BasketCount";
 
 const Product = ({item,...props}) => {
-const longDescription = {};  
-console.log(props)
+  console.log(props)
 
-  const {  trackName, trackId, artistName, trackPrice, artworkUrl100 } = item;
+  const {  trackName, trackId, artistName, trackPrice, artworkUrl100 } = item ;
   return (
     <div className="products" id={"product-container"}>
         <img src={artworkUrl100}
         alt={artistName} />
       <ul className="list">
-        <h2 title={trackName}> {trackName && trackName.length>50 ? trackName.substring(0,50)+ "...": trackName} </h2>
-        <h2 title={artistName}> {artistName && artistName.length>50 ? artistName.substring(0,50)+ "...": artistName}</h2>
-        <p className="price">{trackPrice?"£"+trackPrice:"0"} </p>
-        <p className="description">{longDescription? longDescription.substring(0,300)+ "...":" "}</p>
+        <h2>{trackName}</h2>
+        <h2>{artistName}</h2>
+        <h4 className="price">{trackPrice?"£"+trackPrice:"0"} </h4>
       </ul>
       <div className="buttons">
         {item.inBasket ? 
@@ -28,7 +28,8 @@ console.log(props)
 };
 
 Product.propTypes = {
-  item: Proptypes.object.isRequired
+  item: PropTypes.object.isRequired
 }
 
 export default Product;
+

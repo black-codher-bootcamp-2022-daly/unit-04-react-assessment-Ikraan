@@ -1,32 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
+import ReactPaginate from 'react-paginate';
+import Items from './Items';
+
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 
-const Pagination = ({ postsPerPage, totalPosts, nextPage, previousPage }) => {
-    const pageNumbers = [];
-  
-    for (let index = 1; index <= Math.ceil(totalPosts / postsPerPage); index++) {
-      pageNumbers.push(index);
-    }
-  
+function Pagination({ itemsPerPage }) {
+    const [itemOffset, setItemOffset] = useState(0);
+
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = items.slice(itemOffset, endOffset);
+    const count = Math.ceil(items.length / itemsPerPage);
+
+    const handleClick = (event) => {
+        const newOffset = (event.selected * itemsPerPage) % items.length;
+        console.log(
+            `User requested page number ${event.selected}, which is offset ${newOffset}`
+        );
+        setItemOffset(newOffset);
+    };
+
     return (
-      <div className="pag-container">
-        <ul className="paginate">
-          <li onClick={previousPage} className="page-number">
-            ...Previous page
-          </li>
-          {pageNumbers.map((number) => (
-            <li
-              key={number}
-              onClick={() => Pagination(number)}
-              className="page-number"
-            >
-              {number}
-            </li>
-          ))}
-          <li onClick={nextPage} className="page-number">
-            Next page...
-          </li>
-        </ul>
-      </div>
+        <>
+            <Items currentItems={currentItems} />
+            <Pagination
+                breakLabel="..."
+                nextLabel="next >"
+                onChange={handleClick}
+                pageRangeDisplayed={5}
+                Count={count}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+            />
+        </>
     );
-  };
+}
+
+export default Pagination;
