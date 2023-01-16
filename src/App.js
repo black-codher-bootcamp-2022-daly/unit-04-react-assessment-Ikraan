@@ -24,7 +24,7 @@ function App() {
   function moreData(currentCount) {
     if (currentCount ===data.length - 10) setLoadMore(false);
     return setProducts((currentItems) => [
-      ....currentItems,
+      ...currentItems,
       ...data.slice(currentCount, currentCount + 10),
     ])
   }
