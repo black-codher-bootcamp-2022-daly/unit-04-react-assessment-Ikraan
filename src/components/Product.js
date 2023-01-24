@@ -25,7 +25,7 @@ const Product = ({item,...props}) => {
 };
 
 Product.propTypes = {
-    item: PropTypes.object.isRequired
+   trackPrice: Proptypes.number
 }
 
 export default Product;
