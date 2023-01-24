@@ -1,7 +1,7 @@
 import React from "react";
 
 function Search (props) {
-    const {search,term, setTerm} = props;
+    const {term,setTerm} = props;
 
 
 function handleSubmit(e) {
@@ -22,16 +22,12 @@ return (
       id="term"
       value={props.term}
       onChange={handleSubmit}
-      autoFocus="autoFocus"
+      // autoFocus="autoFocus"
       placeholder="Search items here..."
     />
-
-    <button className="Submit-btn" type="submit" onClick={onSubmit}>
-      Find
-    </button>
+    <input type="submit" className="button" value="Search" onClick={onSubmit}/>
   </form>
 );
 };
-
 
 export default Search;
