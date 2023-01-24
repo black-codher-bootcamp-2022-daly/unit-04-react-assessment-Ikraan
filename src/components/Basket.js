@@ -1,16 +1,14 @@
 import React from "react";
 import Product from "./Product";
-import BasketCount from "./BasketCount";
-import BasketTotal from "./BasketTotal";
 
-const Basket = ({ basket, BasketCount, BasketTotal,...props }) => {
+const Basket = ({ basket, BasketCount, BasketTotal, ...props }) => {
   const { removeFromBasket } = props;
   console.log(basket);
 
   return (
     <>
       {!basket || basket.length === 0 ? (
-        <div className="empty">Sorry, no items in basket...</div>
+        <div className="empty">No items found</div>
       ) : (
         basket.map((item) => (
           <div className="product" key={item.trackId}>
@@ -27,6 +25,7 @@ const Basket = ({ basket, BasketCount, BasketTotal,...props }) => {
           </div>
         ))
       )}
+      <div className="totalBalance">Total: £ {props.basketTotal}</div>
     </>
   );
 };
