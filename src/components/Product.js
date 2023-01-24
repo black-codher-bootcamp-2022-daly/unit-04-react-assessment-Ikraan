@@ -4,7 +4,7 @@ import Proptypes from "prop-types";
 const Product = ({item,...props}) => {
   console.log(props)
 
-  const {  trackName, trackId, artistName, trackPrice, artworkUrl100 } = item ;
+  const {  trackName, trackId, artistName, longDescription, trackPrice, artworkUrl100  } = item ;
   return (
     <div className="products" id={"product-container"}>
         <img src={artworkUrl100}
@@ -13,6 +13,7 @@ const Product = ({item,...props}) => {
         <h2>{trackName}</h2>
         <h2>{artistName}</h2>
         <h4 className="price">{trackPrice?"£"+trackPrice:"0"} </h4>
+        <p className="description">{longDescription?longDescription.substring(0,300)+"...":""}</p>
       <div className="buttons">
         {item.inBasket ? 
       <button  id="remove-button" onClick={() => props.removeFromBasket(trackId)}> Remove</button> :
@@ -24,7 +25,7 @@ const Product = ({item,...props}) => {
 };
 
 Product.propTypes = {
-    trackPrice: Proptypes.number
+    item: PropTypes.object.isRequired
 }
 
 export default Product;
