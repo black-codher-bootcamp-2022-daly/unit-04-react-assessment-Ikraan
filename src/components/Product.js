@@ -1,6 +1,5 @@
-import react from "react";
+import React from "react";
 import Proptypes from "prop-types";
-import App from "../App";
 
 const Product = ({item,...props}) => {
   console.log(props)
@@ -14,20 +13,19 @@ const Product = ({item,...props}) => {
         <h2>{trackName}</h2>
         <h2>{artistName}</h2>
         <h4 className="price">{trackPrice?"£"+trackPrice:"0"} </h4>
-      </ul>
       <div className="buttons">
         {item.inBasket ? 
-      <button  id="add-button" onClick={() => props.removeFromBasket(trackId)}> Remove</button> :
+      <button  id="remove-button" onClick={() => props.removeFromBasket(trackId)}> Remove</button> :
       <button  id="add-button" onClick={() => props.addToBasket(trackId)}> Add to basket</button>
         }
-      </div>
+      </div></ul>
     </div>
   );
 };
 
-// Product.propTypes = {
-//     trackPrice: Proptypes.number
-// }
+Product.propTypes = {
+    trackPrice: Proptypes.number
+}
 
 export default Product;
 
